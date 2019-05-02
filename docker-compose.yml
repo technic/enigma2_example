@@ -1,0 +1,11 @@
+version: '2'
+services:
+  enigma2:
+    container_name: enigma2
+    build: 
+      context: .
+    ports:
+      - 5900:5900
+      - 5678:5678
+    volumes:
+      - './src:/usr/lib/enigma2/python/Plugins/Extensions/Example'

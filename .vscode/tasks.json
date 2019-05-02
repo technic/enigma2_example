@@ -1,0 +1,56 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Docker kill enigma2",
+            "type": "process",
+            "command": "docker",
+            "args": [
+                "exec",
+                "enigma2",
+                "killall",
+                "-9",
+                "/usr/bin/enigma2"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker start enigma2",
+            "type": "process",
+            "presentation": {
+                "reveal": "always"
+            },
+            "isBackground": true,
+            "command": "docker",
+            "args": [
+                "exec",
+                "-it",
+                "-e",
+                "ENIGMA_DEBUG_LVL=5",
+                "enigma2",
+                "/usr/bin/enigma2",
+                "/opt/mytest-ptvsd.py"
+            ],
+            "problemMatcher": {
+                "background": {
+                    "beginsPattern": {
+                        "regexp": "^mytest-ptvsd: Enable debugger"
+                    },
+                    "endsPattern": {
+                        "regexp": "^mytest-ptvsd: Waiting debugger..."
+                    }
+                },
+                "pattern": [
+                    {
+                        "regexp": "^$",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ]
+            }
+        }
+    ]
+}
