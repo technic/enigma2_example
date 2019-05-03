@@ -93,7 +93,7 @@ if __name__ == "__main__":
 Print functions are there for special purpose, which I will tell you right in the next paragraph. Don't forget to restart container to apply all changes to Dockerfile.
 
 We will add a task to VS Code that will start enigma2 in the background so we can attach a debugging session. The following entry is required in `.vscode/tasks.json`.
-```json
+```json5
 {
     "label": "Docker start enigma2",
     "type": "process",
@@ -136,7 +136,7 @@ Here we set up a `docker exec` command which we already familiar with. The cruci
 *NOTE*: the `pattern` option is required by VS Code, so we put some dummy things there.
 
 Finally, add the following to `.vscode/launch.json`. Actually, most of this can be created by navigating VS Code command menus.
-```json
+```json5
 {
     "name": "Attach to enigma2",
     "type": "python",
@@ -152,7 +152,7 @@ Finally, add the following to `.vscode/launch.json`. Actually, most of this can 
     "justMyCode": false, // Need this because our code is under /usr/lib
     "preLaunchTask": "Docker start enigma2",
     "postDebugTask": "Docker kill enigma2",
-},
+}
 ```
 It is important to add correct `pathMappings` and pre/post tasks that we defined earlier, so that we can start debug with *F5*. 
 
